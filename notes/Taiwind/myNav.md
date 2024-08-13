@@ -104,48 +104,82 @@ Pour approfondir vos connaissances sur l'utilisation des icônes Font Awesome, v
    5. **[Font Awesome Cheatsheet](https://fontawesome.com/cheatsheet)**
       Une feuille de triche qui liste toutes les icônes disponibles avec leurs classes et noms.
 
-## code complet du composant:
-        import Link from "next/link";
-    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-    import { faEnvelope, faPhone, faMapPin } from '@fortawesome/free-solid-svg-icons';
-    import { faFacebookF, faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
+## Effets dans le Composant MyNav
+
+### Changement de Couleur au Survol des Liens
+
+Pour améliorer l'interaction utilisateur, les éléments de la barre de navigation changent de couleur lorsque l'on passe la souris dessus. Voici les classes Tailwind CSS utilisées pour cet effet :
+
+- `hover:bg-blue-100` : Change la couleur de fond au survol en bleu clair.
+- `hover:text-blue-500` : Change la couleur du texte au survol en bleu foncé.
+
+### Copier le Numéro de Téléphone au Clic
+
+Pour permettre la copie du numéro de téléphone dans le presse-papiers lorsqu'il est cliqué, la fonction JavaScript suivante est utilisée :
     
-    export default function MyNav() {
-    return (
-    <nav className=" h-14 w-full flex justify-between items-center p-6 border-b border-gray-200">
-    <div className="flex space-x-4">
-    <div className="border border-gray-200 p-4 flex items-center space-x-2">
-    <FontAwesomeIcon icon={faPhone} className="h-5 w-5 text-blue-500" />
-    <div>(+237) 620864761</div>
-    </div>
-    
-                    <Link href="mailto:mymail@example.com" className="border border-gray-200 p-4 flex items-center space-x-4">
-                        <FontAwesomeIcon icon={faEnvelope} className="h-5 w-5 text-blue-500" />
-                        <div>mymail@example.com</div>
-                    </Link>
-    
-                    <div className="border border-gray-200 p-4 flex items-center space-x-2">
-                        <FontAwesomeIcon icon={faMapPin} className="h-5 w-5 text-blue-500" />
-                        <div>yde cameroon</div>
-                    </div>
-                </div>
-                <div className="flex space-x-4">
-                    <Link href="#" className="border border-gray-200 p-4 flex items-center space-x-2">
-                        <FontAwesomeIcon icon={faFacebookF} className="h-5 w-5 text-blue-500" />
-                        <div>Facebook</div>
-                    </Link>
-                    <Link href="#" className="border border-gray-200 p-4 flex items-center space-x-2">
-                        <FontAwesomeIcon icon={faLinkedinIn} className="h-5 w-5 text-blue-500" />
-                        <div>LinkedIn</div>
-                    </Link>
-                    <Link href="#" className="border border-gray-200 p-4 flex items-center space-x-2">
-                        <FontAwesomeIcon icon={faGithub} className="h-5 w-5 text-blue-500" />
-                        <div>Github</div>
-                    </Link>
-                </div>
-            </nav>
-        );
+    ```typescript
+    function copyToClipboard(text: string) {
+        navigator.clipboard.writeText(text).then(function() {
+            alert('Number copied to clipboard!');
+        }, function(err) {
+            console.error('Could not copy text: ', err);
+        });
     }
+
+## code complet du composant:
+              import Link from "next/link";
+        import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+        import { faEnvelope, faPhone, faMapPin } from '@fortawesome/free-solid-svg-icons';
+        import { faFacebookF, faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
+        
+        export default function MyNav() {
+        return (
+        <nav className="h-14 w-full flex justify-between items-center p-6 border-b border-gray-200">
+        <div className="flex space-x-4">
+        <div
+        className="border border-gray-200 p-4 flex items-center space-x-2 hover:bg-blue-100 hover:text-blue-500 transition-colors duration-300 cursor-pointer"
+        onClick={() => copyToClipboard("(+237) 620864761")}
+        >
+        <FontAwesomeIcon icon={faPhone} className="h-5 w-5 text-blue-500" />
+        <div>(+237) 620864761</div>
+        </div>
+        
+                        <Link href="mailto:mymail@example.com" className="border border-gray-200 p-4 flex items-center space-x-4 hover:bg-blue-100 hover:text-blue-500 transition-colors duration-300">
+                            <FontAwesomeIcon icon={faEnvelope} className="h-5 w-5 text-blue-500" />
+                            <div>mymail@example.com</div>
+                        </Link>
+        
+                        <div className="border border-gray-200 p-4 flex items-center space-x-2 hover:bg-blue-100 hover:text-blue-500 transition-colors duration-300">
+                            <FontAwesomeIcon icon={faMapPin} className="h-5 w-5 text-blue-500" />
+                            <div>yde cameroon</div>
+                        </div>
+                    </div>
+                    <div className="flex space-x-4">
+                        <Link href="#" className="border border-gray-200 p-4 flex items-center space-x-2 hover:bg-blue-100 hover:text-blue-500 transition-colors duration-300">
+                            <FontAwesomeIcon icon={faFacebookF} className="h-5 w-5 text-blue-500" />
+                            <div>Facebook</div>
+                        </Link>
+                        <Link href="#" className="border border-gray-200 p-4 flex items-center space-x-2 hover:bg-blue-100 hover:text-blue-500 transition-colors duration-300">
+                            <FontAwesomeIcon icon={faLinkedinIn} className="h-5 w-5 text-blue-500" />
+                            <div>LinkedIn</div>
+                        </Link>
+                        <Link href="#" className="border border-gray-200 p-4 flex items-center space-x-2 hover:bg-blue-100 hover:text-blue-500 transition-colors duration-300">
+                            <FontAwesomeIcon icon={faGithub} className="h-5 w-5 text-blue-500" />
+                            <div>Github</div>
+                        </Link>
+                    </div>
+                </nav>
+            );
+        }
+
+function copyToClipboard(text: string) {
+navigator.clipboard.writeText(text).then(function() {
+alert('Number copied to clipboard!');
+}, function(err) {
+console.error('Could not copy text: ', err);
+});
+}
+
 ### rendu: 
 ![mynav](./images/myNav.png)
 <img src="./images/myNav.png" alt="mynav" style="height: 40px;">
