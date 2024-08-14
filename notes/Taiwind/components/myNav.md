@@ -181,7 +181,7 @@ console.error('Could not copy text: ', err);
 }
 
 ### rendu: 
-![mynav](./images/myNav.png)
+![mynav](imagesyNav.png)
 <img src="./images/myNav.png" alt="mynav" style="height: 40px;">
 
     

@@ -7,7 +7,7 @@ type Props = {};
 
 export default function Page({}: Props) {
 
-    const currentPath = usePathname();
+   const currentPath = usePathname();
 
     return (
         <div>

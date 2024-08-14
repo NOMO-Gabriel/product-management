@@ -262,5 +262,5 @@ Pour intégrer Font Awesome, installez les paquets nécessaires avec npm :
 
 # 8. rendu
 
-![Navbar](./images/navbar.png)
-![Navbar](./images/navbar1.png)
+![Navbar](imagesavbar.png)
+![Navbar](imagesavbar1.png)
